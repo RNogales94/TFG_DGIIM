@@ -11,7 +11,7 @@
 
 Hasta ahora muchas compañías de todos los tipos y tamaños se han dedicado a obtener un potente sistema de información que les permite almacenar de forma ordenada (o no tanto) todos los datos que se producen en el día a día de la empresa.  
 
-Sin embargo esta estrategia de por sí no sirve de nada, ya que si almacenas datos y no los utilizas nunca estás desperdiciando tus recursos.  
+Sin embargo esta estrategia de por sí no sirve de nada, ya que si almacenas datos y no los utilizas nunca, estás desperdiciando tus recursos.  
 La ciencia de datos es la disciplina que transforma la información en conocimiento.  
 Este conocimiento puede ser utilizado para la toma de decisiones de forma manual o de forma automática.  
 El machine learning es el subcampo de la ciencia de datos que se que se centra en hacer que las máquinas aprendan de los datos y puedan realizar 
@@ -44,6 +44,7 @@ necesidad de ser explícitamente programados.
 Arthur Samuel, 1959
 \end{definicion}
 
+\pagebreak
 \subsection{Tipos de problemas en Machine Learning}
 Hay tres tipos de problemas de machine learning: \textbf{Aprendizaje supervisado}, \textbf{Aprendizaje no supervisado} y \textbf{Aprendizaje por refuerzo}.  
 
@@ -192,24 +193,22 @@ Todo el código que se ha utilizado en este proyecto está escrito para Python3 
 
 Para instalar paquetes en Python utilizaremos su gestor de paquetes \textit{pip}.
 
-\begin{lstlisting}
-pip install nombre_paquete
-\end{lstlisting}
+\textit{pip install nombre\_paquete}
 
-En nuestro caso vamos a instalar los paquetes básicos para probar el flujo de trabajo en machine learning.  
+En nuestro caso vamos a instalar los paquetes básicos, que ya hemos comentado antes, para probar el flujo de trabajo en machine learning.  
 Más adelante profundizaremos en la utilización de los algoritmos de boosting.  
 
-\pagebreak
+\subsection{Jupyter Notebook}
+Merece especialmente la pena utilizar Jupyter notebook, ya que podemos trabajar con Python de forma interactiva y generar informes de forma rápida y reproducible por otras personas.  
+Jupyter Notebook levanta un servidor web en nuestra máquina y nos podemos conectar vía navegador web a localhost. En este punto Jupyter está sirviendo una aplicación web en la que podemos escribir bloques de código python y enviarlos a ejecutarse con una instancia de python (el kernel de jupyter).
 
+También tiene opciones para exponer el notebook a la red de forma segura, por lo que podríamos utilizar jupyter notebook en un servidor con gran potencia de procesamiento y trabajar de forma remota
 
-% Insertar aqui Jupyter notebook ( Machine Learning basic workflow )
-
-% \pagebreak
-
+Jupyter Notebook viene de serie si utilizamos \textbf{Anaconda} para instalar Python junto con todas las herramientas básicas de ciencia de datos.
 
 \section{Algoritmos de Boosting}
 
-El boosting es un tipo particular de ensemble, consiste en un conglomerado de  clasificadores débiles (que son solo un poco mejor que la asignación aleatoria) que actúan de forma conjunta para construir un clasificador fuerte (de gran calidad). Un ejemplo típico de clasificado débil es un arbol de una sola hoja.  
+El boosting es un tipo particular de método para generar un ensemble, este ensemble consiste en un conglomerado de  clasificadores débiles (que son solo un poco mejor que la asignación aleatoria) que actúan de forma conjunta para construir un clasificador fuerte (de gran calidad). Un ejemplo típico de clasificado débil es un arbol de una sola hoja.  
 En boosting se va construyendo el clasificador de forma iterativa, como ya mencionamos en la sección matemática.  
 Las instancias que no han sido bien clasificadas en la iteración anterior adquieren una mayor importancia para la siguiente iteración. Podríamos decir que el algoritmo de boosting va concentrandose en acertar las instancias más dificiles conforme avanza en su proceso iterativo.  
 
@@ -223,13 +222,13 @@ Este proceso iterativo se ve reflejado en la siguiente ilustración:
 Adaboost es el algoritmo de boosting más simple.  
 En Python puede implementarse definiendo un clasificador débil que actúe como base y construyendo el clasificador adaboost en base a él.  
 
-A continuación podemos observar el mismo ejemplo del cáncer de mama aplicando Adaboost con árboles de una sola hoja como hemos explicado anteriormente.
+En el anexo podemos observar el mismo ejemplo del cáncer de mama aplicando Adaboost con árboles de una sola hoja como hemos explicado anteriormente.
 
 \subsection{Extreme Gradient Boosting - XGBoost}
 Adaboost es una forma de boosting simple pero poco eficaz en ejemplos reales.  
 En la actualidad el algoritmo de boosting más famoso es XGBoost, una implementación muy eficiente del Gradient Boosting que aprovecha al máximo los recursos hardware disponibles mediante paralelización.  
 
-A continuación ilustramos el uso de XGBoost en el ejemplo anterior:
+Podemos ver la utilización de XGBoost en el anexo.
 
 \section{Ruido de clase, Regularización, Underfing y over-fitting}
 Se denomina ruido de clase a las instancias mal clasificadas en el conjunto de entrenamiento.
@@ -278,9 +277,6 @@ Es el factor de regularización L2 (análogo a la regresión Ridge)
 
 \textbf{alfa}
 Es el factor de regularización L1 (análogo a la regresión Lasso)
-
-
-
 
 
 
