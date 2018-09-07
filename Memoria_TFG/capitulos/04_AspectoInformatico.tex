@@ -227,20 +227,57 @@ A continuación podemos observar el mismo ejemplo del cáncer de mama aplicando 
 
 \subsection{Extreme Gradient Boosting - XGBoost}
 Adaboost es una forma de boosting simple pero poco eficaz en ejemplos reales.  
-En la actualidad el algoritmo de boosting más famoso es XGBoost, una implementación muy eficiente del Gradient Boosting que aprovecha al máximo los recursos hardware disponibles.  
+En la actualidad el algoritmo de boosting más famoso es XGBoost, una implementación muy eficiente del Gradient Boosting que aprovecha al máximo los recursos hardware disponibles mediante paralelización.  
 
 A continuación ilustramos el uso de XGBoost en el ejemplo anterior:
 
-\section{Ruido de clase, Regularización, Underfing y Overfiting}
+\section{Ruido de clase, Regularización, Underfing y over-fitting}
+Se denomina ruido de clase a las instancias mal clasificadas en el conjunto de entrenamiento.
+Estas instancias deben ser eliminadas a toda costa de nuestro conjunto de entrenamiento, pero el problema es que no sabemos cuales son ruidosas y cuales no.  
+Lo que si está en nuestra mano es desconfiar de instancias cuya clase no concuerde con la que según el clasificado debería tener. Esta aproximación consistiría en aplicar un filtro de ruido, normalmente basado en KNN para eliminar del dataset aquellas instancias cuyos $k$ vecinos más cercanos tengan una clase diferente.  
+
+La regularización es una técnica que consiste en conseguir que un clasificador sea capaz de funcionar adecuadamente en datos que nunca ha visto, es decir que no solo se ciña al conjunto de aprendizaje sino que sea capaz de generalizarlo.  
+Para ello lo que la regularización hace es limitar la complejidad del modelo, por ejemplo penalizando a los clasificadores que utilizan más parámetros en su ajuste.  
+Por ejemplo, en un árbol de decisión, la regularización puede consistir en penalizar a los árboles que tienen más nodos hoja.
 
 
+\subsection*{Underfiting / over-fitting}
+
+Los conceptos de under-fitting y over-fitting son conceptos contrapuestos y hacen referencia a los casos en los que estamos tratando el problema como algo demasiado general (under-fitting) o por el contrario estamos cayendo en over-fitting, ciñéndonos demasiado a los datos de entrenamiento y aprendiendo comportamientos aleatorios en un modelo muy complejo que no se ajusta a la realidad (la cual es más simple muchas veces).  
+
+La siguiente imagen es muy esclarecedora de qué es el over-fitting y el under-fitting
+
+\begin{center}
+\includegraphics[scale=0.7]{./img/generalizacion-machine-learning.png}
+\end{center}
+
+En los casos en los que nuestros datos son ruidosos debemos tener especial cuidado con no caer en el over-fitting, ya que aprenderíamos el ruido y nos sería muy difícil acertar en las predicciones con nuestro modelo una vez lo llevemos a predecir la realidad en un entorno productivo.
+
+Es por esto que vamos a prestar especial atención a cómo aplicar factores de regularización al algoritmo XGBoost.
 
 \section{Regularización en XGBoost}
 
+En XGBoost los principales parámetros para regularización son:
+
+\textbf{min\_child\_weight}
+Define la suma mínima de los pesos de todas las observaciones que se requiere para crear un nuevo nodo en el árbol.
+Si establecemos un valor alto estaremos evitando crear nodos que se ajusten a conductas demasiado específicas de un pequeño grupo de observaciones en nuestro conjunto de datos de entrenamiento.
+Sin embargo si establecemos un valor demasiado amplio vamos a descartar prácticamente todo nuestro dataset, salvo las conductas generales, cayendo por tanto en under-fitting.
 
 
+\textbf{max\_depth} 
+La profundidad máxima de una rama de un árbol.
+Si no permitimos ramas muy profundas estamos evitando el over-fitting , ya que el árbol será incapaz de aprender las conductas que sean demasiado específicas.
 
+\textbf{gamma}
+Es el multiplicador de Lagrange que acompaña a la función de pérdida:
+Un nodo se divide solamente cuando el resultado de la división conduce a una reducción de la función de pérdida. Gamma es proporcional a la magnitud de la reducción de la función de pérdida necesaria para que se produzca la división. Por tanto debe elegirse un gamma u otro dependiendo de cuál sea nuestra función de pérdida.
 
+\textbf{lambda}
+Es el factor de regularización L2 (análogo a la regresión Ridge)
+
+\textbf{alfa}
+Es el factor de regularización L1 (análogo a la regresión Lasso)
 
 
 

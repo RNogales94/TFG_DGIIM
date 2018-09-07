@@ -45,14 +45,14 @@
 % Re-usable information
 % ********************************************************************
 \newcommand{\myTitle}{Análisis de los algoritmos de Boosting en entornos con ruido de clase.\xspace}
-\newcommand{\myDegree}{Doble Grado en Ingeniería Informática y Matemáticas\xspace}
+\newcommand{\myDegree}{Doble Grado en Ingenieria Informática y Matemáticas\xspace}
 \newcommand{\myName}{Rafael Nogales Vaquero \xspace}
 \newcommand{\myProf}{Francisco Herrera Triguero  \xspace}
-\newcommand{\myOtherProf}{Salvador García López \xspace}
+\newcommand{\myOtherProf}{Salvador Garcia López \xspace}
 %\newcommand{\mySupervisor}{Put name here\xspace}
-\newcommand{\myFaculty}{Escuela Técnica Superior de Ingenierías Informática y de
+\newcommand{\myFaculty}{Escuela Tecnica Superior de Ingenierias Informática y de
 Telecomunicación\xspace}
-\newcommand{\myFacultyShort}{E.T.S. de Ingenierías Informática y de
+\newcommand{\myFacultyShort}{E.T.S. de Ingenierias Informática y de
 Telecomunicación\xspace}
 \newcommand{\myDepartment}{Departamento de ...\xspace}
 \newcommand{\myUni}{\protect{Universidad de Granada}\xspace}
@@ -86,7 +86,7 @@ pdfproducer = {pdflatex}
 % \makeglossary
 
 % Definición de comandos que me son tiles:
-%\renewcommand{\indexname}{Índice alfabético}
+%\renewcommand{\indexname}{indice alfabetico}
 %\renewcommand{\glossaryname}{Glosario}
 
 \pagestyle{fancy}
@@ -146,7 +146,7 @@ pdfproducer = {pdflatex}
 \newcommand{\bigrule}{\titlerule[0.5mm]}
 
 
-%Para conseguir que en las páginas en blanco no ponga cabecerass
+%Para conseguir que en las paginas en blanco no ponga cabecerass
 \makeatletter
 \def\clearpage{%
   \ifvmode
@@ -187,14 +187,83 @@ pdfproducer = {pdflatex}
 
 \input{capitulos/04_AspectoInformatico}
 
-\input{capitulos/05_Conclusiones}
+
+
+\begin{thebibliography}{1}
+
+
+\bibitem{ V. Vapnik and A. Chervonenkis }
+On the uniform convergence of relative frequencies of events to their probabilities.
+\\\texttt{ Theory of Probability and its Applications. 1971 }
+%----------
+\bibitem { Vapnik, Vladimir N }
+Statistical Learning Theory
+\\\texttt{ Statistical Learning Theory. (1989)}
+%----------
+\bibitem
+{ Gyorfi, L.; Devroye, L.; Lugosi, G. }
+A probabilistic theory of pattern recognition (1996)
+\\\texttt{ A probabilistic theory of pattern recognition (1996) }
+%----------
+\bibitem
+{Corso, } Corso
+\\\texttt{ J. Boosting and adaboost. }
+%----------
+\bibitem { Sebastian Raschka }
+Python Machine Learning
+\\\texttt{ ISBN 978-1-78355-513-0  September 2015 }
+%----------
+\bibitem{ Sebastian Raschka }
+Python Machine Learning
+\\\texttt{ ISBN 978-1-78355-513-0  September 2015 }
+%----------
+\bibitem{ Yuxi (Hayden) Liu }
+Python Machine Learning By Example
+\\\texttt{ ISBN 978-1-78355-311-2 May 2017 }
+%----------
+\bibitem{ Steven F. Lott }
+Modern Python Cookbook
+\\\texttt{ ISBN 978-1-78646-925-0  November 2016 }
+%----------
+\bibitem{ Maria D. Acosta, Camilo Aparicio, Antonio Moreno }
+Apuntes de Analisis Matematico I
+\\\texttt{ Universidad de Granada }
+%----------
+\bibitem{ Luis Merino, Evangelina Santos }
+algebra Lineal con metodos elementales
+\\\texttt{ Paraninfo, Universidad de Granada }
+%----------
+\bibitem{ Yaser S. Abu-Mostafa, Malik Magdon-Ismail Hsuan-Tien Lin }
+Learning from data, a short course
+\\\texttt{ California Institute of Technology, Rensselaer Polytechnic Institute, National Taiwan University }
+%----------
+\bibitem{ T.M Apostol }
+analisis Matematico
+\\\texttt{ California Institute of Technology (1976) }
+%----------
+\bibitem{ Calculo Vectorial }
+Jerrold E. Marsden
+Anthony J. Tromba
+\\\texttt{ California Institute of Technology, University of California }
+%----------
+\bibitem{ Analisis numerico }
+Richard L. Burden, J. Douglas Faires
+\\\texttt{ Youngstown State University }
+
+\bibitem{ paralle-xgboost }
+Parallel Gradient Boosting Decision Trees
+\\\texttt{http://zhanpengfang.github.io/418home.html}
+
+
+\end{thebibliography}
+
+
 
 %
 %
 %
 %%\nocite{*}
-%\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
-%\bibliographystyle{miunsrturl}
+
 %
 %\appendix
 %\input{apendices/manual_usuario/manual_usuario}

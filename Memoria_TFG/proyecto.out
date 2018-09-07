@@ -4,7 +4,7 @@
 \BOOKMARK [1][-]{section.1.3}{Herramientas}{chapter.1}% 4
 \BOOKMARK [1][-]{section.1.4}{Fuentes}{chapter.1}% 5
 \BOOKMARK [0][-]{chapter.2}{Objetivos}{}% 6
-\BOOKMARK [1][-]{section.2.1}{Entender c\363mo funcionan los algoritmos de boosting}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.1}{Estudio general de los algoritmos de boosting}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.2}{Analizar c\363mo el ruido les afecta}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.3}{Proponer una mejora para hacerlos m\341s robustos al ruido}{chapter.2}% 9
 \BOOKMARK [0][-]{chapter.3}{Aspecto Matem\341tico}{}% 10
@@ -28,6 +28,5 @@
 \BOOKMARK [1][-]{section.4.5}{Algoritmos de Boosting}{chapter.4}% 28
 \BOOKMARK [2][-]{subsection.4.5.1}{Adaboost}{section.4.5}% 29
 \BOOKMARK [2][-]{subsection.4.5.2}{Extreme Gradient Boosting - XGBoost}{section.4.5}% 30
-\BOOKMARK [1][-]{section.4.6}{Ruido de clase, Regularizaci\363n, Underfing y Overfiting}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.6}{Ruido de clase, Regularizaci\363n, Underfing y over-fitting}{chapter.4}% 31
 \BOOKMARK [1][-]{section.4.7}{Regularizaci\363n en XGBoost}{chapter.4}% 32
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 33
