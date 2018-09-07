@@ -1,0 +1,26 @@
+\chapter{Introducción}
+
+\section{Contexto}
+
+El objetivo final de este trabajo es desarrollar un mecanismo que haga que el algoritmo XGBoost (el algoritmo de Boosting más utilizado a nivel global) sea más robusto al ruido de clase.  
+
+Este algoritmo es utilizado en problemas de ambitos muy diferentes siempre que haya que trabajar con datos tabulados suele dar un gran resultado.  
+Por desgracia hay muchos problemas con datos tabulados que son susceptibles de tener datos mal clasificados y esto es un gran problema para los algoritmos de boosting clásicos como Adaboost.  
+
+El problema principal radica en que para ajustarse rápidamente a los datos los algoritmos de boosting suelen utilizar funciones de pérdida exponenciales que dan una importancia enorme a los datos ruidosos. 
+
+Lo cual nos deja un amplio terreno sobre el que trabajar.
+
+\section{Solución}
+Debido a que el nuestro mayor problema es el sobreajuste debido a la función de pérdida exponencial ya que da un peso cada vez mayor a los datos difíciles de clasificar y los ruidosos siempre lo son.  
+Es por esto que la estrategia a seguir para mitigar este problema va a consistir en utilizar otras funciones de pérdida más robustas al ruido.  
+Previamente repasaremos todos los conceptos matemáticos relacionados con el boosting, las funciones de pérdida y el aprendizaje automático en general. 
+
+\section{Herramientas}
+Clasificaremos nuestras herramientas en dos tipos: Herramientas matemáticas y herramientas software.  
+
+Para la parte matemática nuestras herramientas serán el cálculo diferencial, la estadística y el álgebra lineal.  
+
+En la parte informática utilizaremos principalmente R, Python y algunas de sus librerías: pandas, scikit-learn, xgboost, matplotlib...
+
+\section{Fuentes}

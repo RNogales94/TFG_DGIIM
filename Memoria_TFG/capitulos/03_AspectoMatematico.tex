@@ -1,0 +1,126 @@
+\chapter{Aspecto Matemático}
+El Machine Learning tiene una gran base matemática puesto que su fundamento se basa en comprender una distribución de probabilidad desconocida que genera lo que observamos en la realidad.  
+Nuestro trabajo consistirá en construir una función que se aproxime a la real y de la que podamos inferir resultados aplicables en la realidad.
+
+
+\section{Empirical risk minimization}
+El principio ERM (Empirical Risk Minimization) es un principio en la teoría estadística del aprendizaje que se usa para acotar de forma teórica el rendimiento de una familia de algortimos de aprendizaje.  
+
+Consideremos la siguiente situación, que es muy general en la mayoría de problemas de aprendizaje supervisado. Tenemos dos espacios de objetos$ X $ e $Y$ y queremos aprender una función $h: X \mapsto Y $ (a menudo llamada \textit{hipótesis}) cuya salida, dado un $x \in X$ es un objeto $y \in Y$.  
+Para hacerlo disponemos de un \textit{conjunto de entranamiento} de $m$ muestras: $(x_1, y_1), ..., (x_m, y_m)$ dónde $x_i \in X$ es una entrada y $y_i \in Y$ es su correspondiente salida, la cual nosotros pensamos que viene dada por la función de hipótesis $h(x_i) = y_i$.  
+
+Para formalizar esta idea, supongamos que existe una función de distribución conjunta $P(x,y)$ sobre $X$ e $Y$ y que el conjunto de entremaniento consiste en $m$ muestras  $(x_1, y_1), ..., (x_m, y_m)$ independientes e identicamente distribuidas de $P(x,y)$. Es importante notar que esta suposición nos permite modelar la incertidumbre en las predicciones (por ejemplo, ruido en los datos) ya que $y$ no es una función deterministica de $x$ sino una variable aleatoria cuya función de distribución es $P(y|x)$ para un $x$ fijo.  
+
+Supongamos además que tenemos una función real no negativa $L(\hat{y}, y)$ a la que llamaremos \textit{Función de Pérdida} que mide cómo de diferente es la predición $\hat{y}$ (una hipótesis) es de la realidad $y$. El \textit{riesgo} asociado a una hipótesis $h(x)$ se define como la esperánza matemática de la función de pérdida:
+
+$$ R(h) = \EX [L(h(x), y)] = \int L(h(x),y)dP(x,y) $$
+
+Una función de pérdida muy utilizada a nivel teórico es la \textbf{0-1}:  
+$$L({\hat {y}},y)=I({\hat {y}}\neq y)$$
+Dónde $I(...)$ es la función indicadora.
+
+El fin último de un algoritmo de aprendizaje es encontrar una función de hipótesis $h^*$ en una famila de funciones $\mathcal{H}$ para la cual el operador riesgo es minimal:  
+$$ h^* = arg \min_{h\in\mathcal{H}} R(h) $$
+
+Todo lo hablado es muy bonito teóricamente, pero en general, el riesgo $R(h)$ no puede calcularse de ningún modo ya que la función de distribución $P(x,y)$ es desconocida para el algoritmo de aprendizaje. Sin embargo, podemos calcular una aproximación, llamada \textit{riesgo empírico}, calculando la media de la función de pérdida en el conjunto de entrenamiento:  
+
+$$ R_{\text{emp}}(h) = \frac{1}{m}\sum_{i=1}^m L(h(x_i), y_i) $$
+
+El principio de minimización del riesgo empírico establece que el algoritmo de aprendizaje debe escoger la función de hipótesis $\hat{h}$ que minimize el riesgo empírico:
+
+$$\hat{h}=\arg \min_{h\in {\mathcal {H}}}R_{\text{emp}}(h).$$
+
+Es decir el algoritmo de aprendizaje definido por el principio ERM consite en resolver el problema de optimización recién planteado. Para lo cual se van a utilizar las técnicas clásicas de resolución de problemas de optimización y se utilizarán propiedades matemáticas de las funciones de péridida tales como la convexidad y la diferenciabilidad cuando procedan.
+
+\section{Calculo Diferencial Multivariante}
+
+\subsection{Optimización convexa}
+
+El algoritmo de gradiente descendente es un algoritmo para minimizar de forma aproximada funciones convexas. 
+Sea $f : \Omega \subset \mathbb{R}^m \rightarrow \mathbb{R}$ una función convexa, diferenciable y que alcanza su mínimo en $\Omega$.  
+Sabemos que el gradiente de $f$ ($\nabla f$) es un vector que indica la dirección de máximo crecimiento de $f$ en cada punto.  
+
+Por tanto, dado $x \in \Omega$ tenemos que $-\nabla f(x)$ es el vector que indica la dirección en la que $f$ se minimiza más rápidamente desde $x$.
+
+Para ilustrarlo intuitívamente podemos pensar en $f(\Omega)$ como una superficie suave y en $(x,f(x))$ como un punto sobre ella. Entonces si dejásemos caer una gota de agua justo sobre este punto, la gota se deslizaría en la dirección de $\nabla f(x)$ y además lo haría a una velocidad proporcional a $ | \nabla f(x) |$.
+
+El algoritmo de gradiente descendente consiste en construir una sucesión de los puntos por los que esta gota pasaría si bajase en pequeños tramos rectos y no de forma continua.  
+
+Formalmente:  
+Sea $f : \Omega \subset \mathbb{R}^m \rightarrow \mathbb{R}$ una función convexa de clase $C^1(\Omega)$ con mínimo en $p$. Y sea $\{p_t\}$ una sucesión de puntos de $\Omega$ tal que $\{p_t\}$ converge a $ p $. Para esto se elige un punto $p_0$ cualquiera en $\Omega$ y construímos desde él el resto de la sucesión recurrentemente:  
+$$ p_{t+1} = p_t - \alpha_t \nabla f(p_t) $$
+Dónde el parámetro $\alpha_t$ se selecciona de tal manera que $p_{t+1} \in \Omega$ y \\$ f(p_t) \geq f(p_{t+1})$.  
+
+\textbf{Nota:}
+En el contexto del aprendizaje automático a este parámetro $\alpha$ se le suele denotar como $\eta$ y se le denomina \textit{tasa de aprendizaje}, además se le suele dar un valor constante y no se le exige ninguna restricción, lo que puede conllevar a que el gradiente descendente no descienda.  
+
+
+\section{Algoritmos de aprendizaje y gradiente descendente}
+En nuestro caso particular nos interesa minimizar la función de pérdida de un algoritmo de aprendizaje.   
+Recordamos que el objetivo de un algoritmo de aprendizaje según el principio ERM es minimizar el riesgo empírico:
+
+$$ R_{\text{emp}}(h) = \frac{1}{m}\sum_{i=1}^m L(h(x_i), y_i) $$
+
+Por lo tanto lo que buscamos es un clasificador $\hat{H}$ que minimize el riesgo empírico
+$$\hat{H} = \argmin_h \frac{1}{m}\sum_{i=1}^m [L(h(x), y)]$$
+
+El algoritmo de gradient boosting considera $y \in \R$ y busca una aproximación $\hat{H}(x)$ construida como suma de clasificadores débiles ponderados. Es decir como suma de funciones $h_i(x)$ pertenecientes a una famila de funciones $\mathcal{H}$.  
+
+$$\hat{H} = \sum_{i=1}^M w_i h_i(x) + \text{const}$$
+
+De acuerdo con el principio de ERM el algoritmo de boosting debe encontrar una aproximación $\hat{H}$ que minimiza el error medio de la función de pérdida en el conjunto de entrenamiento.  
+El método elegido por el boosting consiste en establecer un modelo inicial constante $H_0$ y mejorarlo incrementalmente usando la metodología greedy:
+
+$$ H_0(x) =  \argmin_w \sum_{i=1}^n L(y_i, w) $$
+$$ H_m(x) = H_{m-1}(x) + \argmin_{h_m \in \mathcal{H}} \sum_{i=1}^n L(y_i,  H_{m-1}(x_i) + h_m(x_i))$$
+
+dónde $h_m \in \mathcal{H}$ es un clasificador débil.  
+
+Desafortunadamente, elegir la mejor función $h$ en cada paso para una función de pérdida $L$ arbitraria no es computable en general. Sin embargo podemos restringirnos a una versión simplificada del problema.
+La idea es aplicar \textbf{gradiente descendente} para aproximar la solución del problema de minimización. 
+Si consideramos el caso continuo, es decir, donde $\mathcal{H}$ es el conjunto de las funciones diferenciables sobre $\R$, las funciones $\mathcal{C^1(\R)}$ podemos actualizar los pesos del modelo de acuerdo a las siguientes ecuaciones:
+
+$$ H_m(x) = H_{m-1}(x) - w_m \sumn \nabla H_{m-1} L(y_i, H_{m-1}(x_i))$$,
+$$ w_m = \argmin_w \sumn L(y_i, H_{m-1}(x_i) - w \nabla H_{m-1} L(y_i, H_{m-1}(x_i)))$$
+dónde la derivada se toma respecto a las funciones $H_i$ con $ i \in \{1,..,m\}$.  
+
+En el caso discreto, es decir cuando $\mathcal{H}$ tiene un conjunto finito de funciones, elegimos $h$ como la función más cercana al gradiente de $L$ para el cual el peso $w$ puede ser calculado minimizando las ecuaciones de arriba con algún algoritmo iterativo sencillo.  
+
+
+
+
+\pagebreak
+\subsection*{Algoritmo boosting:}	 
+
+\begin{algorithmic}
+\State{\textbf{Entrada}$_1$: El conjunto de entrenamiento $\{(x_{i},y_{i})\}_{i=1}^{n}$}
+\State{\textbf{Entrada}$_2$: Una función de pérdida diferenciable $L(y,H(x))$}
+\State{\textbf{Entrada}$_3$: El número de iteraciones $M$.}
+\State{}
+\State{Inicializar el modelo con un valor constante:}
+\State{$H_{0}(x)={\underset {w }{\arg \min }}\sum _{i=1}^{n}L(y_{i},w ).$}
+\For{$m$ en $\{1,..,M\}$}
+\State{Calcular el error asociado a esa iteración:}
+\State{$r_{i,m}=-\left[{\frac {\partial L(y_{i},H(x_{i}))}{\partial H(x_{i})}}\right]_{H(x)=H_{m-1}(x)}\quad {\mbox{for }}i=1,\ldots ,n.$}
+\State{Entrenar un clasificador base (por ejemplo un arbol)}
+\State{$h_{m}(x)$ usando el conjunto de aprendizaje $\{(x_i, r_{i,m})\}_{i=1}^n$.}
+\State{ Calcular el peso $w_m$ solucionando el siguiente problema de optimización:}
+\State{$w_{m}={\underset {w}{\operatorname \argmin}\sum_{i=1}^{n}L\left(y_{i},H_{m-1}(x_{i})+w h_{m}(x_{i})\right)}.$}
+\State{Actualizar el modelo:}
+\State{$H_{m}(x)=H_{m-1}(x)+w_{m}h_{m}(x)$}
+\EndFor
+\State{}
+\State{\textbf{Salida}: $H_{M}(x)$}
+\end{algorithmic}
+
+
+\subsubsection{El parámetro $M$ y el sobreajuste:}
+
+Ajustarnos mucho al conjunto de entrenamiento puede degradar el modelo como ya sabemos (caemos en sobreajuste). Además de utilizar funciones de pérdida que incluyan formas de regularización podemos minimizar el efecto del sobreajuste eligiendo un parámetro $M$ adecuado.  
+
+Un $M$ pequeño infrajustará el modelo y por el contrario uno demasiado grande caerá en sobreajuste. 
+
+
+%Boosting
+% http://www.cs.huji.ac.il/~shais/Handouts.pdf
+
