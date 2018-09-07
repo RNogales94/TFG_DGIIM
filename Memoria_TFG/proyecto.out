@@ -30,3 +30,4 @@
 \BOOKMARK [2][-]{subsection.4.5.2}{Extreme Gradient Boosting - XGBoost}{section.4.5}% 30
 \BOOKMARK [1][-]{section.4.6}{Ruido de clase, Regularizaci\363n, Underfing y over-fitting}{chapter.4}% 31
 \BOOKMARK [1][-]{section.4.7}{Regularizaci\363n en XGBoost}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.7.1}{Modelo de predici\363n de cancer de mama \(Wisconsin uci\)}{section.4.7}% 33
